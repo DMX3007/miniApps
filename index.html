@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <title>User Data</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            color: #333;
+        }
+        .user-data {
+            background-color: #f4f4f4;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+        .user-data p {
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>User Data</h1>
+    <div class="user-data">
+				<p><strong>ID:</strong> <span id="app"></span></p>
+        <p><strong>Name:</strong> <span id="userFirstAndLast"></span></p>
+        <p><strong>Email:</strong> <span id="userName"></span></p>
+				<button id='button'>getUser</button>
+    </div>
+
+    <script>
+        // Simulated user data (replace with actual data fetching logic)
+        // const userData = {
+        //     name: "John Doe",
+        //     email: "john.doe@example.com",
+        //     age: 30,
+        //     location: "New York, USA"
+        // };
+				const app = window.Telegram.WebApp;
+				// Call as soon as your page is ready for the user to see
+				app.ready();
+				// Expand your web app to full screen
+				app.expand();
+				document.getElementById("app").textContent = app.initData;
+
+				console.log(app.initData);
+				// const { first_name, last_name, username } = window.Telegram.WebApp.initDataUnsafe.user;
+
+				
+				// userData.name = first_name + " " + last_name;
+				// userData.username = username;
+				const getUser = async () => {
+					console.log('call getUser')
+					const response = await fetch(`http://localhost:3000/user/${623646166}`)
+					const userData = await response.json();
+					
+					document.getElementById("userFirstAndLast").textContent = userData.firstName;
+					document.getElementById("userName").textContent = userData.username;
+				}
+				getUser();
+				// document.getElementById("userFirstAndLast").textContent = userData.name;
+				// document.getElementById("userName").textContent = userData.name;
+				
+				document.getElementById("button").addEventListener("click", getUser);				
+    </script>
+</body>
+</html>
