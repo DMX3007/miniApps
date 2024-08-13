@@ -2,7 +2,6 @@ const { Telegraf, Input, Markup } = require('telegraf'); // для отправ�
 require("dotenv").config();
 const cors = require('cors'); // Import cors
 const express = require("express");
-const { configDotenv, config } = require('dotenv')
 
 const PORT = 3000;
 const token = process.env.TELEGRAM_BOT_TOKEN;
