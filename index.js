@@ -58,22 +58,21 @@ app.get("/", (req, res) => {
 	res.sendFile(__dirname + "/index.html");
 });
 
-app.get('/user/:id', (req, res) => {
-	console.log('/user/:id');
-  const userId = req.params.id;
-	console.log(usersData,'users data')
-  // Поиск данных пользователя в объекте
-  const userData = usersData[userId];
+// app.get('/user/:id', (req, res) => {
+// 	console.log('/user/:id');
+//   const userId = req.params.id;
+// 	console.log(usersData,'users data')
+//   // Поиск данных пользователя в объекте
+//   const userData = usersData[userId];
 
-  if (userData) {
-		console.log(userData, 'sended')
-    res.json(userData);
-  } else {
-		console.log('User not found');
-    res.status(404).json({ error: 'User not found' });
-  }
-});
-
+//   if (userData) {
+// 		console.log(userData, 'sended')
+//     res.json(userData);
+//   } else {
+// 		console.log('User not found');
+//     res.status(404).json({ error: 'User not found' });
+//   }
+// });
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
