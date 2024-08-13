@@ -30,46 +30,28 @@
 <body>
     <h1>User Data</h1>
     <div class="user-data">
-				<p><strong>ID:</strong> <span id="app"></span></p>
+				<p><strong>ID:</strong> <span id="userId"></span></p>
         <p><strong>Name:</strong> <span id="userFirstAndLast"></span></p>
         <p><strong>Email:</strong> <span id="userName"></span></p>
 				<button id='button'>getUser</button>
     </div>
 
     <script>
-        // Simulated user data (replace with actual data fetching logic)
-        // const userData = {
-        //     name: "John Doe",
-        //     email: "john.doe@example.com",
-        //     age: 30,
-        //     location: "New York, USA"
-        // };
 				const app = window.Telegram.WebApp;
 				// Call as soon as your page is ready for the user to see
 				app.ready();
 				// Expand your web app to full screen
 				app.expand();
-				document.getElementById("app").textContent = app.initData;
 
-				console.log(app.initData);
-				// const { first_name, last_name, username } = window.Telegram.WebApp.initDataUnsafe.user;
-
+				console.log(app.initDataUnsafe.user, 'unsafe user data');
+				console.log(app.initDataUnsafe, 'unsafe obj');
+				console.log(app, 'app obj');
 				
-				// userData.name = first_name + " " + last_name;
-				// userData.username = username;
-				const getUser = async () => {
-					console.log('call getUser')
-					const response = await fetch(`http://localhost:3000/user/${623646166}`)
-					const userData = await response.json();
-					
-					document.getElementById("userFirstAndLast").textContent = userData.firstName;
-					document.getElementById("userName").textContent = userData.username;
-				}
-				getUser();
-				// document.getElementById("userFirstAndLast").textContent = userData.name;
-				// document.getElementById("userName").textContent = userData.name;
+				const { first_name, last_name, username, id } = app.initDataUnsafe.user;
 				
-				document.getElementById("button").addEventListener("click", getUser);				
+				document.getElementById("userId").textContent = id;
+				document.getElementById("userFirstAndLast").textContent = first_name + ' ' + last_name;
+				document.getElementById("userName").textContent = username;
     </script>
 </body>
 </html>

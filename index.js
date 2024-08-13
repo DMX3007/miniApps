@@ -16,27 +16,36 @@ const bot = new Telegraf(token)
 
 let usersData = {};
 
-bot.start((ctx) => {
-	const userId = ctx.from.id;
-  const firstName = ctx.from.first_name;
-  const lastName = ctx.from.last_name;
-  const username = ctx.from.username;
+// bot.start((ctx) => {
+// 	const userId = ctx.from.id;
+//   const firstName = ctx.from.first_name;
+//   const lastName = ctx.from.last_name;
+//   const username = ctx.from.username;
 
-  console.log(`User ID: ${userId}`);
-  console.log(`First Name: ${firstName}`);
-  console.log(`Last Name: ${lastName}`);
-  console.log(`Username: ${username}`);
+//   console.log(`User ID: ${userId}`);
+//   console.log(`First Name: ${firstName}`);
+//   console.log(`Last Name: ${lastName}`);
+//   console.log(`Username: ${username}`);
 	
-  usersData[userId] = { firstName, lastName, username };
+//   usersData[userId] = { firstName, lastName, username };
 
-	const getContactBtn = Markup.button.contactRequest('Запрос пользователя', 1)
-  ctx.reply(
-    'Добро пожаловать! Нажмите на кнопку ниже, чтобы запустить приложение',
-    Markup.keyboard([
-      Markup.button.webApp('Покажи мне веб сайт', process.env.WEB_APP_URL),
-    ])
-  )
-})
+// 	const getContactBtn = Markup.button.contactRequest('Запрос пользователя', 1)
+//   ctx.reply(
+//     'Добро пожаловать! Нажмите на кнопку ниже, чтобы запустить приложение',
+//     Markup.keyboard([
+//       Markup.button.webApp('Покажи мне веб сайт', process.env.WEB_APP_URL),
+//     ])
+//   )
+// })
+
+bot.command("setmenu", ctx =>
+	// sets Web App as the menu button for current chat
+	ctx.setChatMenuButton({
+		text: "Launch",
+		type: "web_app",
+		web_app: { url: process.env.WEB_APP_URL },
+	}),
+);
 
 bot.launch()
 
